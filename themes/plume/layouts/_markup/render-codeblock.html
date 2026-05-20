@@ -1,0 +1,13 @@
+{{- $label := print .Type " code snippet" -}}
+
+<figure class="code-block" role="figure" aria-label="{{- $label | plainify -}}">
+  <button class="highlight__copy" title="{{- i18n "codeblock.copy.title" -}}"></button>
+
+  {{- with .Attributes.title -}}
+    <figcaption>{{- . -}}</figcaption>
+  {{- end -}}
+
+  {{- with transform.HighlightCodeBlock . -}}
+    {{- .Wrapped -}}
+  {{- end -}}
+</figure>

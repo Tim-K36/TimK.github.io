@@ -1,0 +1,9 @@
+<a
+  class="edit-link"
+  href="{{- printf "%s/%s" .Site.Params.RepositoryContentDir .File.Path -}}"
+  rel="noopener noreferrer"
+  target="_blank"
+>
+  {{- readFile "static/icons/pencil.svg" | safeHTML -}}
+  <span>{{- i18n "edit-link.title" -}}</span>
+</a>

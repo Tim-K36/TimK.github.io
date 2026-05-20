@@ -1,0 +1,42 @@
+[header]
+  toggle-sidebar = "Sidebar openen/sluiten"
+  toggle-menu = "Menu openen/sluiten"
+
+[skip-link]
+  title = "Ga naar hoofdinhoud"
+
+[sidebar]
+  close = "Sidebar sluiten"
+
+[search]
+  placeholder = "Zoeken..."
+
+[toc]
+  title = "Op deze pagina"
+  toggle = "Inhoudsopgave openen/sluiten"
+
+[notFound]
+  title = "Niet gevonden"
+  body = "De pagina kon niet worden gevonden."
+
+[codeblock]
+  [codeblock.copy]
+    title = "Kopiëren naar klembord"
+
+[edit-link]
+  title = "Verbeter deze pagina"
+
+[socialLinks]
+  bluesky = "Bluesky"
+  discord = "Discord"
+  facebook = "Facebook"
+  github = "GitHub"
+  instagram = "Instagram"
+  linkedin = "LinkedIn"
+  pinterest = "Pinterest"
+  reddit = "Reddit"
+  telegram = "Telegram"
+  tiktok = "TikTok"
+  twitter = "Twitter"
+  whatsapp = "WhatsApp"
+  youtube = "YouTube"

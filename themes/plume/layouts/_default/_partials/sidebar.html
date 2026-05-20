@@ -1,0 +1,42 @@
+{{- $root := site.GetPage "section" .Section -}}
+
+{{- if $root.Pages -}}
+  <aside class="sidebar">
+    <div class="sidebar__content">
+      <button
+        class="sidebar__close"
+        data-action="toggle-sidebar"
+        title="{{- i18n "sidebar.close" -}}"
+      ></button>
+
+      <div class="sidebar__section--search">
+        <input
+          name="q"
+          placeholder="{{ i18n "search.placeholder" }}"
+          type="search"
+        />
+        <ul class="sidebar__section--search-results"></ul>
+      </div>
+
+      <nav class="sidebar__nav">
+        <ul class="sidebar__section--pages">
+          {{- if .IsHome -}}
+            {{- range site.Menus.main -}}
+              <li>
+                <a class="sidebar__section--header" href="{{ .URL }}">
+                  {{- .Name -}}
+                </a>
+              </li>
+            {{- end -}}
+          {{- else if $root -}}
+            {{- partial "sidebar-tree.html" (dict "node" $root "current" .) -}}
+          {{- end -}}
+        </ul>
+      </nav>
+    </div>
+
+    {{- partial "footer.html" . -}}
+  </aside>
+
+  <div class="sidebar__backdrop" data-action="toggle-sidebar"></div>
+{{- end -}}

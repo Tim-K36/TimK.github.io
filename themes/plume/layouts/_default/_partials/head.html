@@ -1,0 +1,77 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="{{ site.Params.themeColor }}">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/favicon.ico">
+
+  {{- partialCached "head/preload.html" . -}}
+
+  {{- $title := cond .IsHome .Title (printf "%s | %s" .Title site.Title) -}}
+  {{- $description := .Description | default site.Params.description -}}
+  {{- $image := .Params.image | default "/favicon.ico" | absURL -}}
+  {{- $keywords := .Params.keywords | default site.Params.keywords -}}
+  {{- $author := .Params.author | default site.Params.author -}}
+
+  <title>{{ $title }}</title>
+  <meta name="description" content="{{ $description }}">
+  <meta name="keywords" content="{{ $keywords }}">
+  <meta name="author" content="{{ $author }}">
+  <meta name="language" content="{{ site.LanguageCode }}">
+
+  <link rel="canonical" href="{{ .Permalink }}">
+  <link rel="manifest" href="{{ .Site.BaseURL }}manifest.webmanifest">
+
+  {{- if gt (len site.Languages) 1 -}}
+    {{- range .AllTranslations -}}
+      <link rel="alternate" hreflang="{{ .Lang }}" href="{{ .Permalink }}">
+    {{- end -}}
+  {{- end -}}
+
+  <meta property="og:title" content="{{ $title }}">
+  <meta property="og:description" content="{{ $description }}">
+  <meta property="og:type" content="{{ if .IsHome }}website{{ else }}article{{ end }}">
+  <meta property="og:url" content="{{ .Permalink }}">
+  <meta property="og:locale" content="{{ .Site.LanguageCode }}">
+  <meta property="og:site_name" content="{{ site.Title }}">
+  <meta property="og:image" content="{{ $image }}">
+  <meta property="og:image:width" content="512">
+  <meta property="og:image:height" content="512">
+  <meta property="og:image:alt" content="{{ site.Title }} logo">
+
+  {{- if not .IsHome -}}
+    <meta property="article:author" content="{{ $author }}">
+
+    {{- if .PublishDate -}}
+    <meta property="article:published_time" content="{{ .PublishDate.Format "2006-01-02T15:04:05Z07:00" }}">
+    {{- end -}}
+
+    {{- if .Lastmod -}}
+      <meta property="article:modified_time" content="{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}">
+    {{- end -}}
+
+    {{- if .Section -}}
+      <meta property="article:section" content="{{ .Section }}">
+    {{- end -}}
+
+    {{- if .Params.tags -}}
+      {{- range .Params.tags -}}
+        <meta property="article:tag" content="{{ . }}">
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ $title }}">
+  <meta name="twitter:description" content="{{ $description }}">
+  <meta name="twitter:image" content="{{ $image }}">
+  <meta name="twitter:image:alt" content="{{ site.Title }} logo">
+
+  {{- if site.Params.socialLinks.twitter -}}
+    <meta name="twitter:site" content="{{ site.Params.socialLinks.twitter }}">
+  {{- end -}}
+
+  {{- partial "head/jsonld.html" (dict "page" . "description" $description "image" $image) -}}
+
+  {{- partialCached "head/css.html" . -}}
+</head>

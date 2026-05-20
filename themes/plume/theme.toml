@@ -1,0 +1,13 @@
+name = "Plume"
+license = "MIT"
+licenselink = "https://github.com/Dobefu/hugo-theme-plume/blob/main/LICENSE"
+description = "A lightweight Hugo documentation theme without any external dependencies."
+
+homepage = "https://github.com/Dobefu/hugo-theme-plume"
+
+tags = ["docs", "multilingual", "dark", "light"]
+features = ["responsive", "zero dependencies", "social icons", "search"]
+
+[author]
+  name = "Dobefu"
+  homepage = "https://github.com/Dobefu"

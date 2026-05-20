@@ -1,0 +1,65 @@
+{{- if not .IsHome -}}
+  <div class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
+    {{- $pages := slice -}}
+    {{- $current := . -}}
+
+    {{- range $e := .Ancestors.Reverse -}}
+      {{- $pages = $pages | append $e -}}
+    {{- end -}}
+
+    {{- $pages = $pages | append $current -}}
+    {{- $pageLen := $pages | len -}}
+
+    {{- range $i, $page := $pages -}}
+      {{- if eq $i (sub $pageLen 1) -}}
+        <span
+          class="crumb current"
+          itemprop="itemListElement"
+          itemscope
+          itemtype="https://schema.org/ListItem"
+        >
+          {{- /* Chomp whitespace */ -}}
+          <meta itemprop="item" content="{{ $page.Permalink }}">
+          {{- /* Chomp whitespace */ -}}
+          <span itemprop="name">{{ $page.Title }}</span>
+          {{- /* Chomp whitespace */ -}}
+          <meta itemprop="position" content="{{ add $i 1 }}">
+          {{- /* Chomp whitespace */ -}}
+        </span>
+      {{- else if (eq $i 0) -}}
+        <a
+          class="crumb home"
+          href="{{ $page.Permalink }}"
+          title="{{ $page.Title }}"
+          itemprop="itemListElement"
+          itemscope
+          itemtype="https://schema.org/ListItem"
+        >
+          {{- /* Chomp whitespace */ -}}
+          <meta itemprop="item" content="{{ $page.Permalink }}">
+          {{- /* Chomp whitespace */ -}}
+          <span itemprop="name">{{ $page.Title }}</span>
+          {{- /* Chomp whitespace */ -}}
+          <meta itemprop="position" content="{{ add $i 1 }}">
+          {{- /* Chomp whitespace */ -}}
+        </a>
+      {{- else -}}
+        <a
+          class="crumb"
+          href="{{ $page.Permalink }}"
+          itemprop="itemListElement"
+          itemscope
+          itemtype="https://schema.org/ListItem"
+        >
+          {{- /* Chomp whitespace */ -}}
+          <meta itemprop="item" content="{{ $page.Permalink }}">
+          {{- /* Chomp whitespace */ -}}
+          <span itemprop="name">{{ $page.Title }}</span>
+          {{- /* Chomp whitespace */ -}}
+          <meta itemprop="position" content="{{ add $i 1 }}">
+          {{- /* Chomp whitespace */ -}}
+        </a>
+      {{- end -}}
+    {{- end -}}
+  </div>
+{{- end -}}

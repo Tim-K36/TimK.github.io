@@ -1,0 +1,8 @@
+{{- $dest := .Destination | safeURL -}}
+
+<img
+  {{- with .PlainText }} alt="{{ . }}"{{ end -}}
+  src="{{ $dest }}"
+  {{- with .Title }} title="{{ . }}"{{ end -}}
+>
+{{- /* Chomp trailing newline, to prevent underlined spaces */ -}}

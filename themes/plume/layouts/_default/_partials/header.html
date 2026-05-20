@@ -1,0 +1,23 @@
+{{- $root := site.GetPage "section" .Section -}}
+
+<header class="header">
+  {{- if $root.Pages -}}
+    <button
+      class="header__sidebar--toggle"
+      data-action="toggle-sidebar"
+      title="{{- i18n "header.toggle-sidebar" -}}"
+    ></button>
+  {{- end -}}
+
+  <a class="header__title" href="/">
+    {{- site.Title -}}
+  </a>
+
+  {{- partial "menu.html" (dict "menuID" "main" "page" .) -}}
+
+  <button
+    class="header__menu--toggle"
+    data-action="toggle-menu"
+    title="{{- i18n "header.toggle-menu" -}}"
+  ></button>
+</header>

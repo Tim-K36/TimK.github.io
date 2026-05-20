@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html
+  lang="{{- site.Language.LanguageCode -}}"
+  dir="{{- or site.Language.LanguageDirection `ltr` -}}"
+>
+  {{- partial "head.html" . -}}
+  {{- $hasToc := and (strings.Contains .TableOfContents "<li>") (not (eq .Params.toc false)) -}}
+  {{- $hasSidebar := (site.GetPage "section" .Section).Pages -}}
+
+  <body
+    class="{{ if $hasToc -}}has-toc{{- end }}{{ if $hasSidebar }} has-sidebar{{- end }}"
+  >
+    {{- partial "skip-link.html" . -}}
+
+    {{- partial "header.html" . -}}
+    {{- partial "breadcrumbs.html" . -}}
+    {{- partial "sidebar.html" . -}}
+
+    <main id="main-content">
+      {{- block "main" . -}}{{- end -}}
+    </main>
+
+    {{- if $hasToc -}}
+      <aside id="toc" class="toc">
+        <div class="toc__header" data-action="toggle-toc">
+          <h3 class="toc__title">{{- i18n "toc.title" -}}</h3>
+
+          <button
+            class="toc__toggle"
+            aria-label="{{- i18n "toc.toggle" -}}"
+          ></button>
+        </div>
+
+        <div class="toc__content">
+          {{- .TableOfContents -}}
+        </div>
+      </aside>
+    {{- end -}}
+
+    {{- partialCached "head/js.html" . -}}
+  </body>
+</html>

@@ -1,0 +1,42 @@
+[header]
+  toggle-sidebar = "Toggle sidebar"
+  toggle-menu = "Toggle menu"
+
+[skip-link]
+  title = "Skip to main content"
+
+[sidebar]
+  close = "Close sidebar"
+
+[search]
+  placeholder = "Search..."
+
+[toc]
+  title = "On this page"
+  toggle = "Toggle table of contents"
+
+[notFound]
+  title = "Not Found"
+  body = "The page could not be found."
+
+[codeblock]
+  [codeblock.copy]
+    title = "Copy to clipboard"
+
+[edit-link]
+  title = "Improve this page"
+
+[socialLinks]
+  bluesky = "Bluesky"
+  discord = "Discord"
+  facebook = "Facebook"
+  github = "GitHub"
+  instagram = "Instagram"
+  linkedin = "LinkedIn"
+  pinterest = "Pinterest"
+  reddit = "Reddit"
+  telegram = "Telegram"
+  tiktok = "TikTok"
+  twitter = "Twitter"
+  whatsapp = "WhatsApp"
+  youtube = "YouTube"
