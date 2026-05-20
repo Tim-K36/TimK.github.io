@@ -1,14 +1,21 @@
-no+++
-title = 'TimK Labs'
-linkTitle = 'Home'
-description = 'Tim is a security researcher who loves IT, networking and all things cybersecurity'
-weight = 0
-draft = false
-+++
+---
+title: "Tim's Docs"
+---
 
-## Welcome to TimK Labs! 
+# $whoami
+Tim is a IT professional who is pivoting to the cybersecurity field. 
+He is constantly developing his skills through platforms such as HackTheBox and HackSmarter. 
+You can find his writeups for machine walkthroughs here. 
+You may also find posts about research, techniques, scripts and more. 
 
-I am a security researcher and penetration tester. You will find posts about a variety of topics such as
-offensive security techniques, scripting, software development and more. 
+## Links
 
-Head to the [About](/about) page to learn more. 
+- [Writeups](/writeups/) - Machines walkthroughs
+- [Blog](/blog/) - Research, techniques, and scripting
+
+## Currently
+- Studying for HackTheBox CPTS (Certified Penetration Testing Specialist)
+- Completing HackTheBox Machines
+- Developing tools in python & go for offensive security 
+- Researching modern techniques
+- Studying for Security+

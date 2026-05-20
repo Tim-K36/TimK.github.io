@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>http://localhost:1313/about/</loc>
+  </url><url>
+    <loc>http://localhost:1313/categories/</loc>
+  </url><url>
+    <loc>http://localhost:1313/writeups/hacksmarter/</loc>
+  </url><url>
+    <loc>http://localhost:1313/writeups/htb/</loc>
+  </url><url>
+    <loc>http://localhost:1313/writeups/hacksmarter/machines/linux/</loc>
+  </url><url>
+    <loc>http://localhost:1313/writeups/htb/machines/linux/</loc>
+  </url><url>
+    <loc>http://localhost:1313/writeups/hacksmarter/machines/</loc>
+  </url><url>
+    <loc>http://localhost:1313/writeups/htb/machines/</loc>
+  </url><url>
+    <loc>http://localhost:1313/series/</loc>
+  </url><url>
+    <loc>http://localhost:1313/tags/</loc>
+  </url><url>
+    <loc>http://localhost:1313/</loc>
+  </url><url>
+    <loc>http://localhost:1313/writeups/hacksmarter/machines/windows/</loc>
+  </url><url>
+    <loc>http://localhost:1313/writeups/htb/machines/windows/</loc>
+  </url><url>
+    <loc>http://localhost:1313/writeups/</loc>
+  </url>
+</urlset>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tim&#39;s Docs</title>
+    <link>http://localhost:1313/</link>
+    <description>Recent content on Tim&#39;s Docs</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>About</title>
+      <link>http://localhost:1313/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/about/</guid>
+      <description>&lt;h2 id=&#34;what-youll-find-here&#34;&gt;What You&amp;rsquo;ll Find Here&lt;/h2&gt;&#xA;&lt;p&gt;&lt;strong&gt;Security Research&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;Offensive security techniques, vulnerability research, and exploitation development. My posts here aim to document findings in a clear and reproducible way for educational purposes.&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Coding&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;Development projects, tools, and scripts, mostly security-oriented but not exclusively. Expect walkthroughs and code breakdowns&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Documentation&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;Reference material and notes compiled during research. Written to be useful both as a personal knowledge base and as a resource for others in the field.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

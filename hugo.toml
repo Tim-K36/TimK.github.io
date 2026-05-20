@@ -1,35 +1,47 @@
 baseURL = "https://Tim-K36.github.io/"
-locale = "en-us"
-title = "Tim's Docs"
 theme = "risotto"
-disableKinds = ["taxonomy", "term"]
+title = "Tim's Docs"
+author = "Tim Kilner"
+locale = "en"
+DefaultContentLanguage = "en"
+enableInlineShortcodes = true
+sectionPagesMenu = "main"
 
+[pagination]
+  pagerSize = 5
 
 [params]
-  author = "Tim Kilner"
-  description = "Research and Writeups"
+  noindex = false
 
-  [[params.socialLinks]]
+[params.theme]
+  palette = "tender"
+
+[params.about]
+  title = "About"
+  description = "Research, Writeups and more." 
+  logo = ""
+
+[[params.socialLinks]]
   icon = "fa-brands fa-github"
   title = "GitHub"
   url = "https://github.com/Tim-K36"
 
 [menu]
   [[menu.main]]
-    identifier = "home"
-    name = "Home"
-    url = "/"
+    identifier = "about"
+    name = "About"
+    url = "/about/"
     weight = 10
   [[menu.main]]
     identifier = "writeups"
     name = "Writeups"
     url = "/writeups/"
-    weight = 30
+    weight = 20
   [[menu.main]]
-    identifier = "posts"
+    identifier = "blog"
     name = "Blog"
-    url = "/posts/"
-    weight = 40
+    url = "/blog/"
+    weight = 30
 
 [taxonomies]
   category = "categories"
@@ -44,13 +56,3 @@ disableKinds = ["taxonomy", "term"]
     startLevel = 2
     endLevel = 3
     ordered = true
-
-[privacy]
-  [privacy.youtube]
-    disabled = false
-    privacyEnhanced = true
-
-[services]
-  [services.x]
-    disableInlineCSS = true
-
